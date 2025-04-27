@@ -1,7 +1,7 @@
 import { serve } from "bun";
 import index from "./index.html";
 
-import { usuariosHandler } from './api/routes/usuarios';
+import { getUsuarioById, usuariosHandler } from './api/routes/usuarios';
 import { preguntasHandler } from './api/routes/preguntas';
 import { respuestasHandler } from './api/routes/respuestas';
 
@@ -31,6 +31,13 @@ const server = serve({
         message: `Hello, ${name}!`,
       });
     },
+
+    // TODO: ROUTES: Modificar las rutas para construirlos de esta manera
+    "/api/usuario/:id": {
+      async GET(req) {
+        return await getUsuarioById(req.params.id)
+      }
+    }
   },
 
   development: process.env.NODE_ENV !== "production",

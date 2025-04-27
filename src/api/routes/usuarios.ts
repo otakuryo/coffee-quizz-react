@@ -3,6 +3,14 @@ import { db } from '../db';
 import { usuarios } from '../db/schema';
 import { validateUserExists } from '../helpers/validation';
 
+// TODO: ROUTES: Modificar las funciones para construirlos de esta manera
+export async function getUsuarioById(id: string) {
+  const userSelect = await db.select()
+    .from(usuarios)
+    .where(eq(usuarios.id, Number(id)));
+  return Response.json(userSelect);
+}
+
 export async function usuariosHandler(req: Request) {
   const url = new URL(req.url);
   const id = url.pathname.split('/')[2];

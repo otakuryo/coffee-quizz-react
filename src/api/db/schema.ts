@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import { sqliteTable, text, integer, primaryKey } from "drizzle-orm/sqlite-core";
 
 // Tabla de Usuarios
@@ -5,7 +6,7 @@ export const usuarios = sqliteTable('usuarios', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   nombre: text('nombre').notNull(),
   email: text('email').notNull().unique(),
-  createdAt: text('created_at').default('CURRENT_TIMESTAMP'),
+  createdAt: integer('created_at').default(sql`(CURRENT_TIMESTAMP)`).notNull(),
 });
 
 // Tabla de Preguntas
@@ -16,7 +17,7 @@ export const preguntas = sqliteTable('preguntas', {
   usuarioId: integer('usuario_id')
     .references(() => usuarios.id)
     .notNull(),
-  createdAt: text('created_at').default('CURRENT_TIMESTAMP'),
+  createdAt: integer('created_at').default(sql`(CURRENT_TIMESTAMP)`).notNull(),
 });
 
 // Tabla de Respuestas
@@ -29,5 +30,5 @@ export const respuestas = sqliteTable('respuestas', {
   usuarioId: integer('usuario_id')
     .references(() => usuarios.id)
     .notNull(),
-  createdAt: text('created_at').default('CURRENT_TIMESTAMP'),
+  createdAt: integer('created_at').default(sql`(CURRENT_TIMESTAMP)`).notNull(),
 });

@@ -38,9 +38,11 @@ bun.lockb
 
 # Base de datos real
 db.sqlite
+mydb.sqlite
 
 # Base de datos test
 tests/test.sqlite
+mydb.test.sqlite
 
 # PID files
 bun-test-server.pid

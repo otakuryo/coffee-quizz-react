@@ -33,3 +33,25 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 # Finder (MacOS) folder config
 .DS_Store
 
+# node_modules equiv de bun
+bun.lockb
+
+# Base de datos real
+db.sqlite
+
+# Base de datos test
+tests/test.sqlite
+
+# PID files
+bun-test-server.pid
+
+# Archivos de entorno reales
+.env
+.env.production
+.env.test
+
+# Zip generado
+build.zip
+
+# Output del build
+dist/

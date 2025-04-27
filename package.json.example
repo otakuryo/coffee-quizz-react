@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "bun run src/index.ts", // Arranca el server en modo desarrollo
+    "start": "bun build src/index.ts --outfile=dist/index.js && bun run dist/index.js", // Build y ejecuta
+    "build": "bun build src/index.ts --outfile=dist/index.js", // Solo build
+    "test": "bun test", // Corre solo los tests (requiere que el server esté levantado)
+    "test:full": "bun run start:test-server && bun test && bun run stop:test-server", // Levanta server -> test -> apaga server
+    "start:test-server": "bun run src/index.ts & echo $! > bun-test-server.pid", // Lanza server y guarda PID
+    "stop:test-server": "kill $(cat bun-test-server.pid) && rm bun-test-server.pid", // Mata server de tests
+    "zip": "bun run build && zip -r build.zip dist/ src/ package.json bun.lockb .env.production" // Empaqueta build
+  }
+}

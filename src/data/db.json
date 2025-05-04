@@ -4,19 +4,30 @@
       "id": 1,
       "texto": "¿Cuál es tu película favorita?",
       "fecha": "2025-04-20",
-      "creador": "usuario1",
+      "creador": {
+        "id": 1,
+        "nombre": "Ana"
+      },
       "respuestas": [
         {
           "id": 1,
           "usuarioId": "usuario2",
           "texto": "El Padrino",
-          "fecha": "2025-04-20T14:30:00"
+          "fecha": "2025-04-20T14:30:00",
+          "usuario": {
+            "id": 2,
+            "nombre": "Carlos"
+          }
         },
         {
           "id": 2,
           "usuarioId": "usuario3",
           "texto": "Interestelar",
-          "fecha": "2025-04-20T14:35:00"
+          "fecha": "2025-04-20T14:35:00",
+          "usuario": {
+            "id": 1,
+            "nombre": "Ana"
+          }
         }
       ]
     },
@@ -24,13 +35,20 @@
       "id": 2,
       "texto": "¿Qué harías si te tocase la lotería?",
       "fecha": "2025-04-21",
-      "creador": "usuario3",
+      "creador": {
+        "id": 3,
+        "nombre": "Elena"
+      },
       "respuestas": [
         {
           "id": 1,
-          "usuarioId": "usuario1",
+          "usuarioId": "usuario3",
           "texto": "Viajaría por el mundo durante un año",
-          "fecha": "2025-04-21T14:30:00"
+          "fecha": "2025-04-21T14:30:00",
+          "usuario": {
+            "id": 3,
+            "nombre": "Elena"
+          }
         }
       ]
     }

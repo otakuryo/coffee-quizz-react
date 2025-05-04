@@ -18,7 +18,7 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
     <Card className="w-[600px]">
       <CardHeader>
         <CardTitle>{pregunta.texto}</CardTitle>
-        <CardDescription>Autor: {pregunta.creador}</CardDescription>
+        <CardDescription>Autor: {pregunta.creador.nombre}</CardDescription>
       </CardHeader>
       <CardContent className="hidden">
         <div className="grid w-full items-center gap-4">

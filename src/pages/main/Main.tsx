@@ -8,7 +8,7 @@ import { useUsers } from "@/contexts/UserContext";
 export default function Main() {
 
   const { preguntas, usuarios } = data;
-  const { users, loading, error } = useUsers();
+  const { users } = useUsers();
 
   // Ordenar preguntas por fecha (más recientes primero)
   const preguntasOrdenadas = [...preguntas].sort((a, b) => 

@@ -1,5 +1,6 @@
 import { serve } from "bun";
 import index from "./index.html";
+import MainIndex from "./pages/main/index.html";
 
 import { getUsuarioById, usuariosHandler } from './api/routes/usuarios';
 import { preguntasHandler } from './api/routes/preguntas';
@@ -7,6 +8,7 @@ import { respuestasHandler } from './api/routes/respuestas';
 
 const server = serve({
   routes: {
+    "/": MainIndex,
     // Serve index.html for all unmatched routes.
     "/index": index,
 

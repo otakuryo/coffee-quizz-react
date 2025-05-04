@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import data from '@/data/db.json';
 import NuevaPreguntaCard from "@/components/main/NuevaPreguntaCard";
 import VerPreguntaCard from "@/components/main/VerPreguntaCard";
+import { useUsers } from "@/contexts/UserContext";
 
 export default function Main() {
 
   const { preguntas, usuarios } = data;
+  const { users, loading, error } = useUsers();
 
   // Ordenar preguntas por fecha (más recientes primero)
   const preguntasOrdenadas = [...preguntas].sort((a, b) => 
@@ -17,12 +19,12 @@ export default function Main() {
     <main>
       <div className="header flex flex-col space-y-1.5">
         <h1>Preguntas para el Café</h1>
-        <NuevaPreguntaCard usuarios={usuarios} />
+        <NuevaPreguntaCard usuarios={users} />
         {
           preguntas.map((pregunta, index) => {
             return <VerPreguntaCard 
               key={index} 
-              usuarios={usuarios} 
+              usuarios={users} 
               pregunta={pregunta} />
           })
         }

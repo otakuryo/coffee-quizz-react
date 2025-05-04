@@ -8,11 +8,14 @@
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import Main from "@/pages/main/Main";
+import { UserProvider } from "@/contexts/UserContext";
 
 const elem = document.getElementById("root")!;
 const app = (
   <StrictMode>
-    <Main />
+    <UserProvider>
+      <Main />
+    </UserProvider>
   </StrictMode>
 );
 

@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-export default function SelectInputUsuarios({usuarios}) {
+export default function SelectInputUsuarios({usuarios, section}) {
   return (
     <>
       <Label htmlFor="author">Autor</Label>
@@ -18,7 +18,7 @@ export default function SelectInputUsuarios({usuarios}) {
         <SelectContent position="popper">
           {
             usuarios.map(usuario => (
-              <SelectItem key={usuario.id} value={usuario.id}>
+              <SelectItem key={`${section}-${usuario.id}`} value={`${usuario.id}`}>
                 {usuario.nombre}
               </SelectItem>
             ))

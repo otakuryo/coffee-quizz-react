@@ -37,19 +37,16 @@
   ],
   "usuarios": [
     {
-      "id": "usuario1",
-      "nombre": "Ana",
-      "avatar": "/avatars/ana.jpg"
+      "id": "1",
+      "nombre": "Ana"
     },
     {
-      "id": "usuario2", 
-      "nombre": "Carlos",
-      "avatar": "/avatars/carlos.jpg"
+      "id": "2", 
+      "nombre": "Carlos"
     },
     {
-      "id": "usuario3",
-      "nombre": "Elena",
-      "avatar": "/avatars/elena.jpg"
+      "id": "3",
+      "nombre": "Elena"
     }
   ]
 }

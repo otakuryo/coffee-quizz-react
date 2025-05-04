@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -12,24 +12,41 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import SelectInputUsuarios from "./SelectInputUsuarios"
+import { storeQuestion } from "@/lib/apiUtils"
 
 export default function NuevaPreguntaCard({usuarios}) {
   
+  const [question, setQuestion] = useState("")
   const formRef = useRef<HTMLFormElement>(null)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
 
-    console.log(data);
+    let response = await storeQuestion({
+      userId: data.user,
+      question: data.question
+    })
 
-    // setStateDialog(false)
+    if (response) {
+      clearQuestionInput()
+    }
+
   }
 
   const handleClear = () => {
-    formRef.current?.reset()
+    // formRef.current?.reset()
+    clearQuestionInput()
+  }
+
+  const clearQuestionInput = () => {
+    setQuestion("")
+  }
+
+  const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuestion(e.target.value)
   }
 
   return (
@@ -43,10 +60,17 @@ export default function NuevaPreguntaCard({usuarios}) {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="question">Pregunta</Label>
-                <Input name="question" id="question" placeholder="A quien...?" required={true} />
+                <Input 
+                  value={question} 
+                  onChange={handleQuestionChange} 
+                  name="question" 
+                  id="question" 
+                  placeholder="A quien...?" 
+                  required={true} 
+                />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <SelectInputUsuarios usuarios={usuarios} />
+                <SelectInputUsuarios usuarios={usuarios} section="nueva-pregunta" />
               </div>
             </div>
         </CardContent>

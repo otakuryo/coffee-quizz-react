@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "bun --hot src/index.tsx",
     "start": "NODE_ENV=production bun src/index.tsx",
-    "build": "bun run build.ts",
+    "build": "bun build src/index.tsx --outdir ./build --target bun --minify",
     "migrate": "bun run ./src/api/db/migrate.ts",
     "build-dev": "NODE_ENV=development && source .env && bun drizzle-kit generate && bun run ./src/api/db/migrate.ts",
     "build-test": "NODE_ENV=development && source .env.test && bun drizzle-kit generate && bun run ./src/api/db/migrate.ts && bun test"

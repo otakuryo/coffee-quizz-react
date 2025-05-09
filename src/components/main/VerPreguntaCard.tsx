@@ -39,7 +39,7 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button className="cursor-pointer" variant="outline">Ocultar</Button>
-        <CrearRespuestaDialog btnTitle="Responder" usuarios={usuarios} />
+        <CrearRespuestaDialog btnTitle="Responder" usuarios={usuarios} preguntaId={pregunta.id} />
         <VerRespuestasDialog 
           btnTitle="Ver Respuestas" 
           preguntaId={pregunta.id}

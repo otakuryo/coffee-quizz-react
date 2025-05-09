@@ -66,7 +66,14 @@ export async function respuestasHandler(req: Request) {
       usuarioId: body.usuarioId,
       contenido: body.contenido,
     });
-    return new Response('Respuesta creada', { status: 201 });
+
+    let response = buildResponse({
+      data: null,
+      message: 'Respuesta creada',
+      success: true,
+    })
+
+    return new Response(JSON.stringify(response), { status: 201 });
   }
 
   if (req.method === 'PUT' && id) {

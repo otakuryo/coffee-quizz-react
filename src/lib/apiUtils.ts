@@ -48,3 +48,28 @@ export async function getRespuestas(preguntaId: number) {
   }
 }
 
+export async function storeRespuesta({ usuarioId, preguntaId, contenido }) {
+  try {
+    const response = await fetch('/respuestas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        usuarioId,
+        preguntaId,
+        contenido,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al guardar la respuesta:', error);
+    return false;
+  }
+}

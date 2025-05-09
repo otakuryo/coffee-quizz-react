@@ -11,12 +11,20 @@ import {
 } from "@/components/ui/dialog"
 import NuevaRespuesta from "./NuevaRespuesta"
 import { useState } from "react"
+import { storeRespuesta } from "@/lib/apiUtils";
+
+interface DataRespuesta {
+  contenido: string;
+  usuarioId: string;
+  preguntaId: number;
+}
 
 export function CrearRespuestaDialog(props: any) {
 
   let {
     btnTitle,
-    usuarios
+    usuarios,
+    preguntaId
   } = props
 
   let [stateDialog, setStateDialog] = useState(false)
@@ -37,7 +45,26 @@ export function CrearRespuestaDialog(props: any) {
 
     console.log(data)
 
-    setStateDialog(false)
+    let dataRespuesta: DataRespuesta = {
+      contenido: data.answer,
+      usuarioId: data.user,
+      preguntaId: preguntaId,
+    }
+
+    storeRespuestaCallback(dataRespuesta)
+
+  }
+
+  async function storeRespuestaCallback(dataRespuesta: DataRespuesta) {
+
+    let data = await storeRespuesta(dataRespuesta)
+
+    console.log(data)
+    if(data.success) {
+      setStateDialog(false)
+    }else{
+      console.log(data)
+    }
   }
 
   return (

@@ -26,3 +26,25 @@ export async function storeQuestion({ userId, question }) {
     return false;
   }
 }
+
+export async function getRespuestas(preguntaId: number) {
+  try {
+    const response = await fetch(`/pregunta/${preguntaId}/respuestas`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al obtener las respuestas:', error);
+    return [];
+  }
+}
+

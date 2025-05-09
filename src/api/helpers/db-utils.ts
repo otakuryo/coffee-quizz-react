@@ -7,3 +7,11 @@ export async function clearDatabase() {
   await db.delete(preguntas);
   await db.delete(usuarios);
 }
+
+export function buildResponse({data, message, success}: {data: any, message: string, success: boolean }) {
+  return {
+    data,
+    message,
+    success,
+  }
+}

@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { sqliteTable, text, integer, primaryKey } from "drizzle-orm/sqlite-core";
+import { relations } from 'drizzle-orm';
 
 // Tabla de Usuarios
 export const usuarios = sqliteTable('usuarios', {
@@ -32,3 +33,19 @@ export const respuestas = sqliteTable('respuestas', {
     .notNull(),
   createdAt: integer('created_at').default(sql`(CURRENT_TIMESTAMP)`).notNull(),
 });
+
+// Relacion entre preguntas y respuestas
+export const preguntaRelacion = relations(preguntas, ({ many }) => ({
+  respuestas: many(respuestas, {
+    fields: [preguntas.id],
+    references: [respuestas.preguntaId],
+  }),
+}));
+
+// Relacion entre respuesta y pregunta
+export const respuestaRelacion = relations(respuestas, ({ one }) => ({
+  pregunta: one(preguntas, {
+    fields: [respuestas.preguntaId],
+    references: [preguntas.id],
+  }),
+}));

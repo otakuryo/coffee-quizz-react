@@ -1,7 +1,35 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
-import { respuestas } from '../db/schema';
+import { respuestas, preguntas } from '../db/schema';
 import { validateUserExists, validateQuestionExists, validateAnswerExists } from '../helpers/validation';
+import { buildResponse } from '../helpers/db-utils';
+
+export async function getPreguntaByIdWithRespuestas({params, req}: {params: {id: string}, req: Request}) {
+
+  if (!await validateQuestionExists(Number(params.id))) {
+    let error = {
+      message: 'Pregunta no encontrada',
+      data: null,
+      success: false,
+    }
+    return new Response(JSON.stringify(error), { status: 404 });
+  }
+
+  const respuestasPregunta = await db.query.preguntas.findMany({
+    where: eq(preguntas.id, Number(params.id)),
+    with: {
+      respuestas: true,
+    },
+  });
+
+  let response = buildResponse({
+    data: respuestasPregunta,
+    message: 'OK',
+    success: true,
+  })
+
+  return Response.json(response);
+}
 
 export async function respuestasHandler(req: Request) {
   const url = new URL(req.url);

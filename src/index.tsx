@@ -4,7 +4,7 @@ import MainIndex from "./pages/main/index.html";
 
 import { getUsuarioById, usuariosHandler } from './api/routes/usuarios';
 import { preguntasHandler } from './api/routes/preguntas';
-import { respuestasHandler } from './api/routes/respuestas';
+import { getPreguntaByIdWithRespuestas, respuestasHandler } from './api/routes/respuestas';
 
 const server = serve({
   routes: {
@@ -38,6 +38,12 @@ const server = serve({
     "/api/usuario/:id": {
       async GET(req) {
         return await getUsuarioById(req.params.id)
+      }
+    },
+
+    "/api/pregunta/:id/respuestas": {
+      async GET(req) {
+        return await getPreguntaByIdWithRespuestas({params: req.params, req: req})
       }
     }
   },

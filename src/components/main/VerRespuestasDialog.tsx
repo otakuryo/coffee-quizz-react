@@ -63,8 +63,8 @@ export function VerRespuestasDialog(props: any) {
       <DialogTrigger asChild>
         <Button className="cursor-pointer" onClick={onOpen}>{btnTitle}</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
+      <DialogContent className="sm:max-w-md max-h-[80vh] overflow-y-auto">
+        <DialogHeader className="sticky -top-5 bg-background pt-3">
           <DialogTitle>{pregunta?.contenido ?? "Cargando..."}</DialogTitle>
           <DialogDescription>
             Listado de respuestas.

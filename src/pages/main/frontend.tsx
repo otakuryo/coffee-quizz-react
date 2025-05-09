@@ -10,6 +10,7 @@ import { StrictMode } from "react";
 import Main from "@/pages/main/Main";
 import { UserProvider } from "@/contexts/UserContext";
 import { PreguntaProvider } from "@/contexts/PreguntaContext";
+import { Toaster } from "@/components/ui/sonner"
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -17,6 +18,7 @@ const app = (
     <UserProvider>
       <PreguntaProvider>
         <Main />
+        <Toaster />
       </PreguntaProvider>
     </UserProvider>
   </StrictMode>

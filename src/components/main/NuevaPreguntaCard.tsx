@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label"
 import SelectInputUsuarios from "./SelectInputUsuarios"
 import { storeQuestion } from "@/lib/apiUtils"
 import { usePreguntas } from "@/contexts/PreguntaContext"
+import { toast } from "sonner"
 
 export default function NuevaPreguntaCard({usuarios}) {
   
@@ -36,6 +37,20 @@ export default function NuevaPreguntaCard({usuarios}) {
     if (response) {
       clearQuestionInput()
       refetch()
+      toast("Pregunta creada correctamente", {
+        description: "Mira en la sección de preguntas",
+        duration: 10000,
+        icon: "🥳",
+        position: "bottom-center",
+      })
+    }else{
+
+      toast("Error al crear la pregunta", {
+        description: "Por favor, intenta nuevamente",
+        duration: 10000,
+        icon: "🚨",
+        position: "top-center",
+      })
     }
 
   }

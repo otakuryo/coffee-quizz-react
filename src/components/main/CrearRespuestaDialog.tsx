@@ -12,6 +12,7 @@ import {
 import NuevaRespuesta from "./NuevaRespuesta"
 import { useState } from "react"
 import { storeRespuesta } from "@/lib/apiUtils";
+import { toast } from "sonner";
 
 interface DataRespuesta {
   contenido: string;
@@ -59,11 +60,27 @@ export function CrearRespuestaDialog(props: any) {
 
     let data = await storeRespuesta(dataRespuesta)
 
-    console.log(data)
     if(data.success) {
       setStateDialog(false)
+
+      toast("Pregunta creada correctamente", {
+        description: "Mira en la sección de preguntas",
+        duration: 5000,
+        icon: "🥳",
+        position: "bottom-center",
+      })
+
     }else{
+      
       console.log(data)
+
+      toast("No se pudo crear la respuesta", {
+        description: "Por favor, intenta nuevamente",
+        duration: 10000,
+        icon: "🚨",
+        position: "bottom-center",
+      })
+
     }
   }
 

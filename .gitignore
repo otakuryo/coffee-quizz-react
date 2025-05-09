@@ -57,3 +57,4 @@ build.zip
 
 # Output del build
 dist/
+build/

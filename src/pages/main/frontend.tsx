@@ -9,12 +9,15 @@ import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import Main from "@/pages/main/Main";
 import { UserProvider } from "@/contexts/UserContext";
+import { PreguntaProvider } from "@/contexts/PreguntaContext";
 
 const elem = document.getElementById("root")!;
 const app = (
   <StrictMode>
     <UserProvider>
-      <Main />
+      <PreguntaProvider>
+        <Main />
+      </PreguntaProvider>
     </UserProvider>
   </StrictMode>
 );

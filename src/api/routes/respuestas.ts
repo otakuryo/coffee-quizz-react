@@ -15,12 +15,18 @@ export async function getPreguntaByIdWithRespuestas({params, req}: {params: {id:
     return new Response(JSON.stringify(error), { status: 404 });
   }
 
-  const respuestasPregunta = await db.query.preguntas.findMany({
+  const respuestasPreguntas = await db.query.preguntas.findMany({
     where: eq(preguntas.id, Number(params.id)),
     with: {
       respuestas: true,
     },
   });
+
+  let respuestasPregunta = undefined;
+
+  if(respuestasPreguntas.length > 0) {
+    respuestasPregunta = respuestasPreguntas[0];
+  }
 
   let response = buildResponse({
     data: respuestasPregunta,

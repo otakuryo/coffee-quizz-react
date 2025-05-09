@@ -10,26 +10,62 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import RespuestaItem from "./RespuestaItem"
+import { useState } from "react"
+import type { Pregunta } from "@/types/Pregunta"
 
 export function VerRespuestasDialog(props: any) {
   let {
     btnTitle,
-    respuestas
+    preguntaId
   } = props
 
+  let [pregunta, setPregunta] = useState<Pregunta | null>(null)
+  let [open, setOpen] = useState(false)
+
+  async function getPreguntaByIdWithRespuestas(preguntaId: string) {
+    let response = await fetch(`/api/pregunta/${preguntaId}/respuestas`)
+    let data = await response.json()
+    if(data.success) {
+      setPregunta(data.data)
+    }
+  }
+
   function ListaRespuestas() {
-    return respuestas.map((respuesta,index)=> {
+
+    if(!pregunta) return null;
+
+    return pregunta.respuestas.map((respuesta,index)=> {
       return <RespuestaItem key={index} respuesta={respuesta} />
     })
   }
+
+  function onOpenChange(open: boolean) {
+    if (open) {
+      getPreguntaByIdWithRespuestas(preguntaId)
+    } else {
+      setOpen(false)
+      setTimeout(() => {
+        setPregunta(null)
+      }, 150)
+    }
+  }
+  
+  function onClose() {
+    setOpen(false)
+  }
+
+  function onOpen() {
+    setOpen(true)
+  }
+  
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button className="cursor-pointer">{btnTitle}</Button>
+        <Button className="cursor-pointer" onClick={onOpen}>{btnTitle}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Respuestas</DialogTitle>
+          <DialogTitle>{pregunta?.contenido ?? "Cargando..."}</DialogTitle>
           <DialogDescription>
             Listado de respuestas.
           </DialogDescription>
@@ -41,8 +77,8 @@ export function VerRespuestasDialog(props: any) {
         </div>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
+            <Button type="button" variant="secondary" onClick={onClose}>
+              Cerrar
             </Button>
           </DialogClose>
         </DialogFooter>

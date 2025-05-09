@@ -18,7 +18,7 @@ export default function RespuestaItem({respuesta}) {
   return (
     <div className="flex flex-col space-y-1.5">
       <Label htmlFor={currentName}>{userNombre}:</Label>
-      <Textarea name={currentName} value={respuesta.texto} readOnly />
+      <Textarea name={currentName} value={respuesta.contenido} readOnly />
     </div>
   )
 }

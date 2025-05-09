@@ -13,9 +13,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import SelectInputUsuarios from "./SelectInputUsuarios"
 import { storeQuestion } from "@/lib/apiUtils"
+import { usePreguntas } from "@/contexts/PreguntaContext"
 
 export default function NuevaPreguntaCard({usuarios}) {
   
+  let { refetch } = usePreguntas()
+
   const [question, setQuestion] = useState("")
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -32,6 +35,7 @@ export default function NuevaPreguntaCard({usuarios}) {
 
     if (response) {
       clearQuestionInput()
+      refetch()
     }
 
   }

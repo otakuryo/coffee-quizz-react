@@ -18,9 +18,11 @@ export default function Main() {
   // );
 
   return (
-    <main>
+    <main className="mx-2 mb-3">
       <div className="header flex flex-col space-y-1.5">
         <h1>Preguntas para el Café</h1>
+      </div>
+      <div className="container flex flex-col space-y-1.5">
         <NuevaPreguntaCard usuarios={users} />
         {
           preguntas.map((pregunta, index) => {

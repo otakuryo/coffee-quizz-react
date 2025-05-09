@@ -54,7 +54,7 @@ export default function NuevaPreguntaCard({usuarios}) {
   }
 
   return (
-    <Card className="w-[600px]">
+    <Card className="max-w-[600px]">
       <form ref={formRef} onSubmit={handleSubmit}>
         <CardHeader>
           <CardTitle>Crear Pregunta</CardTitle>

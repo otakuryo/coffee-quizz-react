@@ -27,7 +27,7 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
   };
 
   return (
-    <Card className="w-[600px]">
+    <Card className="max-w-[600px]">
       <CardHeader>
         <CardTitle>{pregunta.contenido}</CardTitle>
         <CardDescription>Autor: {userNombre}</CardDescription>

@@ -10,8 +10,11 @@ import {
 import { VerRespuestasDialog } from "./VerRespuestasDialog"
 import { CrearRespuestaDialog } from "./CrearRespuestaDialog"
 import { useUsers } from "@/contexts/UserContext"
+import { useState } from "react"
 
 export default function VerPreguntaCard({usuarios, pregunta}) {
+
+  let [visible, setVisible] = useState(true);
 
   let { users } = useUsers();
 
@@ -26,8 +29,12 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
 
   };
 
+  const handleVisible = () => {
+    setVisible(!visible);
+  }
+
   return (
-    <Card className="max-w-[600px]">
+    <Card className={`max-w-[600px] ${visible ? 'block' : 'hidden'}`}>
       <CardHeader>
         <CardTitle>{pregunta.contenido}</CardTitle>
         <CardDescription>Autor: {userNombre}</CardDescription>
@@ -38,7 +45,7 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button className="cursor-pointer" variant="outline">Ocultar</Button>
+        <Button className="cursor-pointer" variant="outline" onClick={handleVisible}>Ocultar</Button>
         <CrearRespuestaDialog btnTitle="Responder" usuarios={usuarios} preguntaId={pregunta.id} />
         <VerRespuestasDialog 
           btnTitle="Ver Respuestas" 

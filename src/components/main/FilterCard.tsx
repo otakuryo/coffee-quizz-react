@@ -45,7 +45,7 @@ export default function FilterCard({ usuarios, onFilterChange }: FilterCardProps
   return (
     <Card className="max-w-[600px]">
       <CardContent>
-        <div className="flex flex-row w-full items-center gap-2">
+        <div className="flex flex-row w-full items-center gap-2 pt-4 md:pt-0">
           <Select name="user" onValueChange={handleUserChange}>
             <SelectTrigger id="author">
               <SelectValue placeholder="Filtra por usuario" />

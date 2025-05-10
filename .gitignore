@@ -58,3 +58,6 @@ build.zip
 # Output del build
 dist/
 build/
+
+# docker database
+dbdata/

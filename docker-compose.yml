@@ -1,0 +1,12 @@
+services:
+  db-coffee-quizz:
+    image: mysql:8.0
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    environment:
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    ports:
+      - ${DB_PORT_EXT}:3306

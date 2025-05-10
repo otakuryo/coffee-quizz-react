@@ -7,6 +7,7 @@ interface PreguntaContextType {
   loading: boolean;
   error: Error | null;
   refetch: () => void;
+  setPreguntas: (preguntas: Pregunta[]) => void;
 }
 
 const PreguntaContext = createContext<PreguntaContextType | undefined>(undefined);
@@ -31,6 +32,10 @@ export const PreguntaProvider: React.FC<PreguntaProviderProps> = ({ children }) 
       }
 
       const data: Pregunta[] = await response.json();
+      data.map(pregunta => {
+        pregunta.visible = true;
+      });
+      
       setPreguntas(data);
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -48,7 +53,7 @@ export const PreguntaProvider: React.FC<PreguntaProviderProps> = ({ children }) 
   }, []);
 
   return (
-    <PreguntaContext.Provider value={{ preguntas, loading, error, refetch: fetchPreguntas }}>
+    <PreguntaContext.Provider value={{ preguntas, loading, error, refetch: fetchPreguntas, setPreguntas }}>
       {children}
     </PreguntaContext.Provider>
   );

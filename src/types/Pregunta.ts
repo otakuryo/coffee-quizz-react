@@ -2,7 +2,8 @@ export interface Pregunta {
   id: number;
   contenido: string;
   usuarioId: string;
-  createAt: string;
+  createdAt: number;
+  visible: boolean;
   respuestas: Respuesta[];
 }
 

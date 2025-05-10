@@ -14,8 +14,6 @@ import { useState } from "react"
 
 export default function VerPreguntaCard({usuarios, pregunta}) {
 
-  let [visible, setVisible] = useState(true);
-
   let { users } = useUsers();
 
   let userNombre = "None";
@@ -30,11 +28,11 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
   };
 
   const handleVisible = () => {
-    setVisible(!visible);
+    pregunta.visible = !pregunta.visible;
   }
 
   return (
-    <Card className={`max-w-[600px] ${visible ? 'block' : 'hidden'}`}>
+    <Card className={`max-w-[600px] ${pregunta.visible ? 'block' : 'hidden'}`}>
       <CardHeader>
         <CardTitle><span className="opacity-50">🤔</span> {pregunta.contenido}</CardTitle>
         <CardDescription>Autor: {userNombre}</CardDescription>

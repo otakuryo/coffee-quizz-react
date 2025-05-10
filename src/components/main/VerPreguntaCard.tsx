@@ -7,10 +7,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { VerRespuestasDialog } from "./VerRespuestasDialog"
 import { CrearRespuestaDialog } from "./CrearRespuestaDialog"
 import { useUsers } from "@/contexts/UserContext"
-import { useState } from "react"
+import { EllipsisVerticalIcon } from "lucide-react"
 
 export default function VerPreguntaCard({usuarios, pregunta}) {
 
@@ -32,9 +40,24 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
   }
 
   return (
-    <Card className={`max-w-[600px] ${pregunta.visible ? 'block' : 'hidden'}`}>
+    <Card className={`relative max-w-[600px] ${pregunta.visible ? 'block' : 'hidden'}`}>
+      
+      <DropdownMenu>
+        <DropdownMenuTrigger className="absolute top-2 right-2">
+          <Button variant="outline" className="cursor-pointer">
+            <EllipsisVerticalIcon className="w-4 h-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Ocultar</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive">Eliminar</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
       <CardHeader>
-        <CardTitle><span className="opacity-50">🤔</span> {pregunta.contenido}</CardTitle>
+        <CardTitle className="me-5 md:me-8"><span className="opacity-50">🤔</span> {pregunta.contenido}</CardTitle>
         <CardDescription>Autor: {userNombre}</CardDescription>
       </CardHeader>
       <CardContent className="hidden">

@@ -1,37 +1,36 @@
-import { sql } from "drizzle-orm";
-import { sqliteTable, text, integer, primaryKey } from "drizzle-orm/sqlite-core";
+import { mysqlTable, int, varchar, timestamp } from "drizzle-orm/mysql-core";
 import { relations } from 'drizzle-orm';
 
 // Tabla de Usuarios
-export const usuarios = sqliteTable('usuarios', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
-  nombre: text('nombre').notNull(),
-  email: text('email').notNull().unique(),
-  createdAt: integer('created_at').default(sql`(CURRENT_TIMESTAMP)`).notNull(),
+export const usuarios = mysqlTable('usuarios', {
+  id: int().primaryKey().autoincrement(),
+  nombre: varchar({ length: 255 }).notNull(),
+  email: varchar({ length: 255 }).notNull().unique(),
+  createdAt: timestamp().defaultNow().notNull(),
 });
 
 // Tabla de Preguntas
-export const preguntas = sqliteTable('preguntas', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
-  titulo: text('titulo').notNull(),
-  contenido: text('contenido').notNull(),
-  usuarioId: integer('usuario_id')
+export const preguntas = mysqlTable('preguntas', {
+  id: int().primaryKey().autoincrement(),
+  titulo: varchar({ length: 255 }).notNull(),
+  contenido: varchar({ length: 255 }).notNull(),
+  usuarioId: int()
     .references(() => usuarios.id)
     .notNull(),
-  createdAt: integer('created_at').default(sql`(CURRENT_TIMESTAMP)`).notNull(),
+  createdAt: timestamp().defaultNow().notNull(),
 });
 
 // Tabla de Respuestas
-export const respuestas = sqliteTable('respuestas', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
-  contenido: text('contenido').notNull(),
-  preguntaId: integer('pregunta_id')
+export const respuestas = mysqlTable('respuestas', {
+  id: int().primaryKey().autoincrement(),
+  contenido: varchar({ length: 255 }).notNull(),
+  preguntaId: int()
     .references(() => preguntas.id)
     .notNull(),
-  usuarioId: integer('usuario_id')
+  usuarioId: int()
     .references(() => usuarios.id)
     .notNull(),
-  createdAt: integer('created_at').default(sql`(CURRENT_TIMESTAMP)`).notNull(),
+  createdAt: timestamp().defaultNow().notNull(),
 });
 
 // Relacion entre preguntas y respuestas

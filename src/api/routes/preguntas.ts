@@ -1,7 +1,8 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
-import { preguntas } from '../db/schema';
+import { preguntas, respuestas } from '../db/schema';
 import { validateUserExists, validateQuestionExists } from '../helpers/validation';
+import { buildResponse } from '../helpers/db-utils';
 
 export async function preguntasHandler(req: Request) {
   const url = new URL(req.url);
@@ -54,9 +55,17 @@ export async function preguntasHandler(req: Request) {
     if (!await validateQuestionExists(Number(id))) {
       return new Response('Pregunta no encontrada', { status: 404 });
     }
+    await db.transaction(async (tx) => {
+      await tx.delete(respuestas).where(eq(respuestas.preguntaId, Number(id)));
+      await tx.delete(preguntas).where(eq(preguntas.id, Number(id)));
+    });
 
-    await db.delete(preguntas).where(eq(preguntas.id, Number(id)));
-    return new Response('Pregunta eliminada', { status: 200 });
+    let response = buildResponse({
+      data: null,
+      message: 'Pregunta eliminada',
+      success: true,
+    })
+    return new Response(JSON.stringify(response), { status: 200 });
   }
 
   return new Response('Not Found', { status: 404 });

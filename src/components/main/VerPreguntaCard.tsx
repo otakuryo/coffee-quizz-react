@@ -18,11 +18,14 @@ import {
 import { VerRespuestasDialog } from "./VerRespuestasDialog"
 import { CrearRespuestaDialog } from "./CrearRespuestaDialog"
 import { useUsers } from "@/contexts/UserContext"
-import { EllipsisVerticalIcon } from "lucide-react"
-
+import { EllipsisVerticalIcon, TrashIcon } from "lucide-react"
+import { deleteQuestion } from "@/lib/apiUtils"
+import { toast } from "sonner"
+import { usePreguntas } from "@/contexts/PreguntaContext"
 export default function VerPreguntaCard({usuarios, pregunta}) {
 
   let { users } = useUsers();
+  let { refetch } = usePreguntas();
 
   let userNombre = "None";
 
@@ -39,20 +42,44 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
     pregunta.visible = !pregunta.visible;
   }
 
+  const handleDelete = async () => {
+    const data = await deleteQuestion(pregunta.id);
+    console.log(data);
+    if(data.success) {
+      refetch();
+      toast("Pregunta eliminada correctamente", {
+        description: "Mira en la sección de preguntas",
+        duration: 5000,
+        icon: "🥳",
+        position: "bottom-center",
+      })
+    }else{
+      toast("No se pudo eliminar la pregunta", {
+        description: "Por favor, intenta nuevamente",
+        duration: 10000,
+        icon: "🚨",
+        position: "bottom-center",
+      })
+    }
+  }
+
   return (
     <Card className={`relative max-w-[600px] ${pregunta.visible ? 'block' : 'hidden'}`}>
       
       <DropdownMenu>
-        <DropdownMenuTrigger className="absolute top-2 right-2">
-          <Button variant="outline" className="cursor-pointer">
-            <EllipsisVerticalIcon className="w-4 h-4" />
-          </Button>
+        <DropdownMenuTrigger className="absolute top-2 right-2 cursor-pointer p-1" type="button">
+          <EllipsisVerticalIcon className="w-4 h-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>Acciones</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Ocultar</DropdownMenuItem>
-          <DropdownMenuItem variant="destructive">Eliminar</DropdownMenuItem>
+          <DropdownMenuItem 
+            variant="destructive" 
+            onClick={handleDelete}
+            className="cursor-pointer"
+          >
+             Eliminar
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 

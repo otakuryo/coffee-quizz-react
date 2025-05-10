@@ -73,3 +73,25 @@ export async function storeRespuesta({ usuarioId, preguntaId, contenido }) {
     return false;
   }
 }
+
+export async function deleteQuestion(preguntaId: number) {
+  try {
+    const response = await fetch(`/preguntas/${preguntaId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al eliminar la pregunta:', error);
+    return false;
+  }
+}
+

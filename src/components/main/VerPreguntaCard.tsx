@@ -36,7 +36,7 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
   return (
     <Card className={`max-w-[600px] ${visible ? 'block' : 'hidden'}`}>
       <CardHeader>
-        <CardTitle>{pregunta.contenido}</CardTitle>
+        <CardTitle><span className="opacity-50">🤔</span> {pregunta.contenido}</CardTitle>
         <CardDescription>Autor: {userNombre}</CardDescription>
       </CardHeader>
       <CardContent className="hidden">

@@ -6,6 +6,7 @@ import VerPreguntaCard from "@/components/main/VerPreguntaCard";
 import { useUsers } from "@/contexts/UserContext";
 import { usePreguntas } from "@/contexts/PreguntaContext";
 import FilterCard from "@/components/main/FilterCard";
+import Footer from "@/components/general/footer";
 export default function Main() {
 
   // const { preguntas, usuarios } = data;
@@ -51,6 +52,7 @@ export default function Main() {
           }
         </div>
       </div>
+      <Footer />
     </main>
   )
 }

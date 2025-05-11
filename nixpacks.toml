@@ -1,5 +1,4 @@
 [phases.setup]
-# Usa Bun como runtime y gestor de paquetes
 nixPkgs = ["bun", "git"]
 
 [phases.build]

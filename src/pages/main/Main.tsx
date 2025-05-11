@@ -1,6 +1,4 @@
 import "@@/styles/globals.css";
-import { Button } from "@/components/ui/button";
-import data from '@/data/db.json';
 import NuevaPreguntaCard from "@/components/main/NuevaPreguntaCard";
 import VerPreguntaCard from "@/components/main/VerPreguntaCard";
 import { useUsers } from "@/contexts/UserContext";

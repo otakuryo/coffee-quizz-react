@@ -1,7 +1,8 @@
-providers = ["bun"]
-
 [phases.setup]
 nixPkgs = ["bun", "git"]
+
+[phases.install]
+cmds = ["bun i --no-save"]
 
 [phases.build]
 cmds = [
@@ -9,5 +10,5 @@ cmds = [
   "bun run build"
 ]
 
-[phases.start]
+[start]
 cmd = "bun run start"

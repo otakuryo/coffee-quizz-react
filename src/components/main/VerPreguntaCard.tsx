@@ -52,6 +52,10 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
         duration: 5000,
         icon: "🥳",
         position: "bottom-center",
+        action: {
+          label: "Cerrar",
+          onClick: () => console.log("Cerrar")
+        }
       })
     }else{
       toast("No se pudo eliminar la pregunta", {
@@ -59,6 +63,10 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
         duration: 10000,
         icon: "🚨",
         position: "bottom-center",
+        action: {
+          label: "Cerrar",
+          onClick: () => console.log("Cerrar")
+        }
       })
     }
   }

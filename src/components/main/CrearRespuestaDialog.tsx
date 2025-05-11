@@ -68,6 +68,10 @@ export function CrearRespuestaDialog(props: any) {
         duration: 5000,
         icon: "🥳",
         position: "bottom-center",
+        action: {
+          label: "Cerrar",
+          onClick: () => console.log("Undo")
+        }
       })
 
     }else{
@@ -79,6 +83,10 @@ export function CrearRespuestaDialog(props: any) {
         duration: 10000,
         icon: "🚨",
         position: "bottom-center",
+        action: {
+          label: "Cerrar",
+          onClick: () => console.log("Cerrar")
+        }
       })
 
     }

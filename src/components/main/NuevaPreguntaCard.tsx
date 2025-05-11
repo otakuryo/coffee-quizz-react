@@ -42,6 +42,10 @@ export default function NuevaPreguntaCard({usuarios}) {
         duration: 10000,
         icon: "🥳",
         position: "bottom-center",
+        action: {
+          label: "Cerrar",
+          onClick: () => console.log("Cerrar")
+        }
       })
     }else{
 
@@ -50,6 +54,10 @@ export default function NuevaPreguntaCard({usuarios}) {
         duration: 10000,
         icon: "🚨",
         position: "top-center",
+        action: {
+          label: "Cerrar",
+          onClick: () => console.log("Cerrar")
+        }
       })
     }
 

@@ -31,6 +31,10 @@ export default function Main() {
     setPreguntas(preguntasFiltradas);
   };
 
+  const handleRefetch = () => {
+    setPreguntas([...preguntas]);
+  }
+
   return (
     <main className="mx-2 mb-3">
       <div className="header flex flex-col space-y-1.5 text-center">
@@ -45,7 +49,8 @@ export default function Main() {
               return <VerPreguntaCard 
                 key={index} 
                 usuarios={users} 
-                pregunta={pregunta} />
+                pregunta={pregunta}
+                onRefetch={handleRefetch} />
             })
           }
         </div>

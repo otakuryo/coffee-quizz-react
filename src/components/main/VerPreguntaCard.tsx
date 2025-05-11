@@ -22,7 +22,9 @@ import { EllipsisVerticalIcon, TrashIcon } from "lucide-react"
 import { deleteQuestion } from "@/lib/apiUtils"
 import { toast } from "sonner"
 import { usePreguntas } from "@/contexts/PreguntaContext"
-export default function VerPreguntaCard({usuarios, pregunta}) {
+import { useState } from "react";
+
+export default function VerPreguntaCard({usuarios, pregunta, onRefetch}) {
 
   let { users } = useUsers();
   let { refetch } = usePreguntas();
@@ -40,6 +42,7 @@ export default function VerPreguntaCard({usuarios, pregunta}) {
 
   const handleVisible = () => {
     pregunta.visible = !pregunta.visible;
+    onRefetch();
   }
 
   const handleDelete = async () => {

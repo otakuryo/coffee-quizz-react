@@ -1,3 +1,5 @@
+providers = ["bun"]
+
 [phases.setup]
 nixPkgs = ["bun", "git"]
 

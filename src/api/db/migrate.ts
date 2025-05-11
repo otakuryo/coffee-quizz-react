@@ -4,4 +4,7 @@ import { drizzle } from "drizzle-orm/mysql2";
 
 const dbPath = process.env.DATABASE_URL;
 const db = drizzle(dbPath);
-migrate(db, { migrationsFolder: "./drizzle" });
+(async () => {
+  await migrate(db, { migrationsFolder: "./drizzle" });
+  process.exit();
+})();

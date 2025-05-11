@@ -4,7 +4,8 @@ nixPkgs = ["bun", "git"]
 [phases.build]
 cmds = [
   "bun install",
-  "bun run build"
+  "bun run build",
+  "bun run migrate"
 ]
 
 [phases.start]

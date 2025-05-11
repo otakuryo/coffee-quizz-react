@@ -1,12 +1,15 @@
 import mysql from "mysql2/promise";
+import { drizzle } from 'drizzle-orm/mysql2';
 import { migrate } from "drizzle-orm/mysql2/migrator";
-import { drizzle } from "drizzle-orm/mysql2";
 
 const dbPath = process.env.DATABASE_URL;
 
-(async () => {
-  const connection = await mysql.createConnection(dbPath);
-  const db = drizzle(connection);
-  await migrate(db, { migrationsFolder: "./drizzle" });
+const connection = mysql.createPool({
+  uri: dbPath,
+});
+const db = drizzle(connection);
+migrate(db, { migrationsFolder: "./drizzle" })
+.then(() => {
+  console.log("Migrations applied successfully");
   process.exit();
-})();
+});

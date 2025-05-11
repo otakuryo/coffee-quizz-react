@@ -12,6 +12,19 @@ const server = serve({
     // Serve index.html for all unmatched routes.
     "/index": index,
 
+    "/img/:pathname": {
+      async GET(req) {
+        try {
+          const url = new URL(req.url);
+          const pathname = req.params.pathname;
+          const filePath = `./public/img/${pathname}`;
+          return new Response(Bun.file(filePath));
+        } catch (error) {
+          return new Response('Not Found', { status: 404 });
+        }
+      }
+    },
+
     "/api/hello": {
       async GET(req) {
         return Response.json({

@@ -37,7 +37,8 @@ export default function Main() {
 
   return (
     <main className="mx-2 mb-3">
-      <div className="header flex flex-col space-y-1.5 text-center">
+      <div className="header flex flex-col space-y-1.5 text-center py-3">
+        <img src="/img/logo_black.png" alt="Coffee" className="mx-auto max-w-[200px] w-full max-h-[100px] object-contain" />
         <h1>Preguntas para el Café</h1>
       </div>
       <div className="flex justify-center items-center flex-col w-full">

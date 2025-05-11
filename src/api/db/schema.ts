@@ -15,7 +15,7 @@ export const preguntas = mysqlTable('preguntas', {
   titulo: varchar({ length: 255 }).notNull(),
   contenido: varchar({ length: 255 }).notNull(),
   usuarioId: int()
-    .references(() => usuarios.id)
+    .references(() => usuarios.id, { onDelete: 'cascade' })
     .notNull(),
   createdAt: timestamp().defaultNow().notNull(),
 });
@@ -25,10 +25,10 @@ export const respuestas = mysqlTable('respuestas', {
   id: int().primaryKey().autoincrement(),
   contenido: varchar({ length: 255 }).notNull(),
   preguntaId: int()
-    .references(() => preguntas.id)
+    .references(() => preguntas.id, { onDelete: 'cascade' })
     .notNull(),
   usuarioId: int()
-    .references(() => usuarios.id)
+    .references(() => usuarios.id, { onDelete: 'cascade' })
     .notNull(),
   createdAt: timestamp().defaultNow().notNull(),
 });
